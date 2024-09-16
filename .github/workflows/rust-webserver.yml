@@ -16,13 +16,13 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build
       run: | 
-        cd ./hello_world
+        cd ./rust_web_app
         cargo build --verbose
     - name: Run tests
       run: | 
-        cd ./hello_world 
+        cd ./rust_web_app 
         cargo test --verbose
-    - name: Run grass
+    - name: Run web_app
       run: | 
-        cd ./grass 
+        cd ./rust_web_app 
         cargo run --verbose
