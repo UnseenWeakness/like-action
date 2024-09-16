@@ -26,3 +26,7 @@ jobs:
     #   run: | 
     #     cd ./ws
     #     cargo run -p webservice --bin server1  --verbose
+    - name: Run web_rocket
+      run: | 
+        cd ./ws
+        cargo run -p webservice --bin server2  --verbose
