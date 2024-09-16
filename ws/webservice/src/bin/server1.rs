@@ -1,4 +1,4 @@
-use std::f32::consts::PI;
+// use std::f32::consts::PI;
 
 use actix_web::{get, web, App, HttpServer, Responder};
 
@@ -22,7 +22,7 @@ async fn main() -> std::io::Result<()> {
 }
 
 
-#[test]
-fn test_print_pi() {
-    println!("this is pi {}", PI);
-}
+// #[test]
+// fn test_print_pi() {
+//     println!("this is pi {}", PI);
+// }
