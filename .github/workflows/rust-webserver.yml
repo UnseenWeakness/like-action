@@ -22,7 +22,7 @@ jobs:
     #   run: | 
     #     cd ./ws
     #     cargo test --verbose
-    - name: Run web_app
-      run: | 
-        cd ./ws
-        cargo run -p webservice --bin server1  --verbose
+    # - name: Run web_app
+    #   run: | 
+    #     cd ./ws
+    #     cargo run -p webservice --bin server1  --verbose
