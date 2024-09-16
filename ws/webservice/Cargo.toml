@@ -7,6 +7,10 @@ edition = "2021"
 
 [dependencies]
 actix-web = "4.0"
+rocket = "0.5.1"
 
 [[bin]]
 name = "server1"
+
+[[bin]]
+name = "server2"
