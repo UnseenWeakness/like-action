@@ -29,7 +29,7 @@ jobs:
     - name: Run web_rocket
       run: | 
         cd ./ws
-        cargo run -p webservice --bin server2  --verbose &
+        cargo run -p webservice --bin server2  --verbose
     - name: Test API Endpoint
       run: |
         curl -sf -X GET http://localhost:8000/hello || { echo "hello failed"; exit 1; }
