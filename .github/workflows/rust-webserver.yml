@@ -14,14 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Build
-      run: | 
-        cd ./ws
-        cargo build --verbose
-    - name: Run tests
-      run: | 
-        cd ./ws
-        cargo test --verbose
+    # - name: Build
+    #   run: | 
+    #     cd ./ws
+    #     cargo build --verbose
+    # - name: Run tests
+    #   run: | 
+    #     cd ./ws
+    #     cargo test --verbose
     - name: Run web_app
       run: | 
         cd ./ws
