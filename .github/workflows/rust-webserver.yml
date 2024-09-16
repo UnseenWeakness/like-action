@@ -16,13 +16,13 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build
       run: | 
-        cd ./rust_web_app
+        cd ./ws
         cargo build --verbose
     - name: Run tests
       run: | 
-        cd ./rust_web_app 
+        cd ./ws
         cargo test --verbose
     - name: Run web_app
       run: | 
-        cd ./rust_web_app 
-        cargo run --verbose
+        cd ./ws
+        cargo run -p webservice --bin server1  --verbose
