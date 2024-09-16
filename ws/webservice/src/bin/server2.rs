@@ -1,4 +1,4 @@
-use rocket::{get, launch};
+use rocket::{get, launch, routes};
 
 #[get("/")]
 async fn hello() -> String {
