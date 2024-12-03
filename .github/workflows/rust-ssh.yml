@@ -18,5 +18,12 @@ jobs:
     - name: Build
       run: |
        cd ./ws
-       cargo build -p ssh_connect --verbose
+       cargo build -p ssh_connect --release --verbose
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        token: ${{secrets.secret}}
+        files: |
+          ./ws/ssh_connect/target/release/**
+    
     
