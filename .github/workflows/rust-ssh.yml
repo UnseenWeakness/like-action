@@ -20,7 +20,7 @@ jobs:
        cargo build -p ssh_connect --release --verbose
     - name: pacakge dist
       run: |
-        tar -czvf ssh_connent.tar.gz -C dist ./ws/target
+        tar -czvf ssh_connent.tar.gz ./ws/target
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
