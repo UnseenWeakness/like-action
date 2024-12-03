@@ -1,0 +1,7 @@
+[package]
+name = "ssh_connect"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ssh-rs = { git = "https://github.com/1148118271/ssh-rs.git" }
