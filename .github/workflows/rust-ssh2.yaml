@@ -1,0 +1,30 @@
+name: ssh_connent2
+
+on:
+  push:
+    branches: [ "master" ]
+    tags:
+    - '*'
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build_and_test:
+    name: sshCon2
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+    - run: cd ./ws
+    - uses: actions-rs/cargo@v1
+      with:
+        command: build
+        args: -p ssh_connect --release --verbose
+
+    
+    
