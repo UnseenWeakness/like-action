@@ -18,13 +18,15 @@ jobs:
       run: |
        cd ./ws
        cargo build -p ssh_connect --release --verbose
+    - name: pacakge dist
+      run: |
+        tar -czvf ssh_connent.tar.gz -C dist ./ws/target
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{ github.ref_name }}
-        release_name: Release ${{ github.ref_name }}
+        tag_name: latest
         token: ${{secrets.secret}}
         files: |
-          ./ws/target/**
+          ssh_connent.tar.gz
     
     
