@@ -25,6 +25,6 @@ jobs:
         release_name: Release ${{ github.ref_name }}
         token: ${{secrets.secret}}
         files: |
-          ./ws/target/release/**
+          ./ws/target/**
     
     
