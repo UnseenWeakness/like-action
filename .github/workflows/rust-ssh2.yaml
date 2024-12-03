@@ -20,11 +20,9 @@ jobs:
     - uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
-    - run: cd ./ws
-    - uses: actions-rs/cargo@v1
-      with:
-        command: build
-        args: -p ssh_connect --release --verbose
+    - run: |
+       cd ./ws
+       cargo build -p ssh_connect --release --verbose
 
     
     
