@@ -18,7 +18,7 @@ jobs:
       run: |
        cd ./ws
        cargo build -p ssh_connect --release --verbose
-    - name: pacakge dist
+    - name: pacakge
       run: |
         tar -czvf ssh_connent.tar.gz ./ws/target
     - name: Release
