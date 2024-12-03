@@ -3,6 +3,8 @@ name: ssh_connent
 on:
   push:
     branches: [ "master" ]
+    tags:
+    - '*'
   pull_request:
     branches: [ "master" ]
 
@@ -11,7 +13,7 @@ env:
 
 jobs:
   build:
-    runs-on: centos-20
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: Build
@@ -24,7 +26,7 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: latest
+        tag_name: ${{ github.ref }}
         token: ${{secrets.secret}}
         files: |
           ssh_connent.tar.gz
