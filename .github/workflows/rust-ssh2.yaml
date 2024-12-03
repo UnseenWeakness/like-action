@@ -20,9 +20,11 @@ jobs:
     - uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
+        target: x86_64-unknown-linux-musl
+        override: true
     - run: |
        cd ./ws
-       cargo build -p ssh_connect --release --verbose
+       cargo build -p ssh_connect --release --target x86_64-unknown-linux-musl --verbose
 
     
     
