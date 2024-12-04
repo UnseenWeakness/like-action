@@ -27,9 +27,10 @@ jobs:
             yum install -y gcc-c++ make curl tar
             # 安装 Rust 工具链，跳过交互式安装
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-            # 使用 Rust 安装的完整路径来执行 cargo
+            # 加载 Rust 环境
+            source \$HOME/.cargo/env
             cd ./ws
-            $HOME/.cargo/bin/cargo build -p ssh_connect --release --verbose
+            cargo build -p ssh_connect --release --verbose
           "
     - name: pacakge
       run: |
