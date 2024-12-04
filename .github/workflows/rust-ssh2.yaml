@@ -19,6 +19,11 @@ jobs:
     - name: Build with CentOS Docker
       run: |
         docker run --rm -v $(pwd):/workspace -w /workspace centos:7 bash -c "
+          # 设置 DNS 为 Google DNS（避免 DNS 解析问题）
+          echo 'nameserver 8.8.8.8' > /etc/resolv.conf
+          # 更新包管理器缓存
+          yum clean all
+          yum makecache
           # 安装基本依赖和 Rust 工具链
           yum install -y gcc-c++ make curl tar
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
