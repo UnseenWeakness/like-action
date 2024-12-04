@@ -19,21 +19,18 @@ jobs:
     - name: Build with CentOS Docker
       run: |
         docker run --rm -v $(pwd):/workspace -w /workspace centos:7 bash -c "
-          # 设置 DNS 为 Google DNS（避免 DNS 解析问题）
-          echo 'nameserver 8.8.8.8' > /etc/resolv.conf
-          # 更新包管理器缓存
-          yum clean all
-          yum makecache
-          # 安装基本依赖和 Rust 工具链
-          yum install -y gcc-c++ make curl tar
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-          # 加载 Rust 环境
-          source $HOME/.cargo/env
-          # 安装依赖
-          yum install -y rust cargo
-          cd ./ws
-          cargo build -p ssh_connect --release --verbose
-        "
+            # 修改 CentOS 镜像源为阿里云镜像
+            sed -i 's|http://mirrorlist.centos.org|http://mirrors.aliyun.com/centos|' /etc/yum.repos.d/CentOS-Base.repo
+            yum clean all
+            yum makecache
+            # 安装构建工具
+            yum install -y gcc-c++ make curl tar
+            # 安装 Rust 工具链
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+            source \$HOME/.cargo/env
+            cd ./ws
+            cargo build -p ssh_connect --release --verbose
+          "
     - name: pacakge
       run: |
         tar -czvf ssh_connent2.tar.gz ./ws/target
