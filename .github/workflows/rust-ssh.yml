@@ -16,17 +16,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Build
+    - name: Build with CentOS Docker
       run: |
-       cd ./ws
-       cargo build -p ssh_connect --release --verbose
+        docker run --rm -v $(pwd):/workspace -w /workspace centos:7 bash -c "
+          yum install -y gcc-c++ make rust cargo tar
+          cd ./ws
+          cargo build -p ssh_connect --release --verbose
+        "
     - name: pacakge
       run: |
         tar -czvf ssh_connent.tar.gz ./ws/target
+    - name: Set tag name based on git describe
+      id: tag
+      run: echo "TAG_NAME=$(git describe --tags --always)" >> $GITHUB_ENV
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: laster
+        tag_name: ${{ env.TAG_NAME }}
         token: ${{secrets.secret}}
         files: |
           ssh_connent.tar.gz
