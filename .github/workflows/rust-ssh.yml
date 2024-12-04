@@ -19,6 +19,10 @@ jobs:
     - name: Build with CentOS Docker
       run: |
         docker run --rm -v $(pwd):/workspace -w /workspace rust:latest bash -c "
+        # 安装 musl 工具链
+        apt-get update
+        apt-get install -y musl-tools
+        # 添加 musl 编译目标
         rustup target add x86_64-unknown-linux-musl
         cd ./ws
         cargo build -p ssh_connect --release --target x86_64-unknown-linux-musl --verbose
