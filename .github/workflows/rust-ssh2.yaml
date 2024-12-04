@@ -12,19 +12,35 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build_and_test:
-    name: sshCon2
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions-rs/toolchain@v1
+    - name: Build with CentOS Docker
+      run: |
+        docker run --rm -v $(pwd):/workspace -w /workspace centos:7 bash -c "
+          # 安装基本依赖和 Rust 工具链
+          yum install -y gcc-c++ make curl tar
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+          # 加载 Rust 环境
+          source $HOME/.cargo/env
+          # 安装依赖
+          yum install -y rust cargo
+          cd ./ws
+          cargo build -p ssh_connect --release --verbose
+        "
+    - name: pacakge
+      run: |
+        tar -czvf ssh_connent2.tar.gz ./ws/target
+    - name: Set tag name based on git describe
+      id: tag
+      run: echo "TAG_NAME=$(git describe --tags --always)" >> $GITHUB_ENV
+    - name: Release
+      uses: softprops/action-gh-release@v2
       with:
-        toolchain: stable
-        target: armv7-unknown-linux-gnueabihf
-        override: true
-    - run: |
-       cd ./ws
-       cargo build -p ssh_connect --release --target armv7-unknown-linux-gnueabihf --verbose
-
+        tag_name: ${{ env.TAG_NAME }}
+        token: ${{secrets.secret}}
+        files: |
+          ssh_connent2.tar.gz
     
     
